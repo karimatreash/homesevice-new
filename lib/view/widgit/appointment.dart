@@ -5,10 +5,13 @@ import 'package:homeservice/generated/l10n.dart';
 import 'package:homeservice/view/widgit/AppointmentPage_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<String?>? getUserType() async {
-  final prefs = await SharedPreferences.getInstance();
-  return prefs.getString('userType');
-}
+import '../../core/function/DateUtil.dart';
+
+// Future<String?>? getUserType() async {
+//   final prefs = await SharedPreferences.getInstance();
+//   return prefs.getString('userType');
+//
+// }
 
 class Appointment extends StatefulWidget {
   final String userType;
@@ -150,14 +153,14 @@ class _AppointmentState extends State<Appointment> {
                 ),
                 const SizedBox(width: 20),
                 Text(
-                  widget.date,
+                  DateUtil.formatDate(widget.date!) ,
                   style: const TextStyle(fontSize: 15),
                 ),
               ],
             ),
             const SizedBox(height: 10),
-            
-                userType == '0'?
+
+                widget.userType == '0'?
                      Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -165,10 +168,10 @@ class _AppointmentState extends State<Appointment> {
                   onPressed: () {
                     rating(context, widget.customerId,widget.providerId);
                   },
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          const Color.fromRGBO(26, 153, 206, 1)),
-                      foregroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 203, 6, 6))),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: mainColor,
+                  ),
                   child: Text(S.of(context).compulationRating),
                 ),
               ],

@@ -101,6 +101,12 @@ class _provider_listState extends State<Request_provider> {
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20)),
+                                  SizedBox(height: 15,),
+                                  Text("${snapshot.data![index]['disblaystats']}",
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20)),
                                 ]),
                             const Spacer(),
                             // Icon(Icons.arrow_forward_ios,
@@ -125,6 +131,8 @@ class _provider_listState extends State<Request_provider> {
                                         date: requests[index]['date_request'],
                                         description: requests[index]
                                             ['description'],
+                                            status: requests[index]
+                                            ['starus']
                                       ));
                                 },
                                 icon: const Icon(Icons.arrow_forward_ios,

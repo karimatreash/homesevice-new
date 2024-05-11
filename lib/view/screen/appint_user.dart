@@ -15,8 +15,11 @@ class AppointmentPage extends StatelessWidget {
   Future<List<Map<String, dynamic>>> fetchAppointments() async {
     try {
       final prefs = await SharedPreferences.getInstance();
+      
       userId = prefs.getString('userId')!;
       userType = prefs.getString('userType')!;
+      print("fuck u nigg");
+      print(userId);
       final response = await http
           .get(Uri.parse('http://10.0.2.2:5000/appointment/user/$userId'));
       if (response.statusCode == 200) {
@@ -83,7 +86,7 @@ class AppointmentPage extends StatelessWidget {
                 itemCount: appointments.length,
                 itemBuilder: (context, index) => Appointment(
                   customerId: "$userId",
-                  providerId:appointments[index]['provider_id'],
+                  providerId: appointments[index]['provider_id'].toString() ,
                   fname: appointments[index]['provider_fname'],
                   lname: appointments[index]['provider_lname'],
                   city: appointments[index]['city'],
@@ -91,7 +94,8 @@ class AppointmentPage extends StatelessWidget {
                   des: appointments[index]['description'],
                   date: appointments[index]['date'],
                   phone: appointments[index]['provider_phone'],
-                  servname: appointments[index]['servcie_name'], userType: userType!,
+                  servname: appointments[index]['servcie_name'],
+                  userType: userType!,
                 ),
               );
             }

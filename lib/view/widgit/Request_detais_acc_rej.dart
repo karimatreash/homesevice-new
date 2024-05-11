@@ -77,224 +77,231 @@ class _provider_detailsState extends State<Request_detais_acc_rej> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(children: [
-      const Stack(clipBehavior: Clip.none, children: <Widget>[
-        cover(img: 'images/aelia.png'),
-        Positioned(
-          bottom: -50,
-          left: 130,
-          child: imagep(image: 'images/aelia.png'),
-        ),
-      ]),
-      const SizedBox(
-        height: 70,
-      ),
-      Center(
-        child: Text(
-          '${data.fname!} ${data.lname}',
-          style: const TextStyle(
-              fontFamily: 'Cairo', fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(" الخدمة المطلوبة: ${data.servicen!}"),
-          const SizedBox(
-            width: 15,
+      appBar: AppBar(),
+        body: SingleChildScrollView(
+          child: Column(children: [
+                const Stack(clipBehavior: Clip.none, children: <Widget>[
+          cover(img: 'images/aelia.png'),
+          Positioned(
+            bottom: -50,
+            left: 130,
+            child: imagep(image: 'images/aelia.png'),
           ),
-          const Icon(
-            Icons.work,
-            size: 30,
-          ),
-        ],
-      ),
-      const SizedBox(
-        height: 30,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text('${data.city!} - ${data.location!}'),
-          const SizedBox(
-            width: 15,
-          ),
-          const Icon(
-            Icons.location_city,
-            size: 30,
-          ),
-
-          // Row(
-          //   children: [
-          //     Icon(
-          //       Icons.rate_review_outlined,
-          //       size: 30,
-          //     ),
-          //     SizedBox(
-          //       width: 15,
-          //     ),
-          //     Text('${snapshot.data?.rating}')
-          //   ],
-          // )
-        ],
-      ),
-      const SizedBox(
-        height: 30,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(data.phone!),
-          const SizedBox(
-            width: 15,
-          ),
-          const Icon(
-            Icons.phone_android_outlined,
-            size: 30,
-          )
-        ],
-      ),
-      const SizedBox(
-        height: 30,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(DateUtil.formatDate(data.date!)),
-          const SizedBox(
-            width: 15,
-          ),
-          const Icon(
-            Icons.calendar_month_outlined,
-            size: 30,
-          )
-        ],
-      ),
-      const SizedBox(
-        height: 30,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(data.description!),
-          const SizedBox(
-            width: 15,
-          ),
-          const Icon(
-            Icons.description_outlined,
-            size: 30,
-          )
-        ],
-      ),
-      const SizedBox(
-        height: 60,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              _accept(data.id);
-            },
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.green, // Set text color
-            ),
-            child:  Text(S.of(context).approved),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              _reject(data.id);
-            },
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.red, // Set text color
-            ),
-            child:  Text(S.of(context).reject),
-          ),
-        ],
-      ),
-      Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Directionality(
-              textDirection: ui.TextDirection.ltr,
-              child: ElevatedButton(
-                onPressed: () {
-                  DateTime? dateValue;
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title:  Center(child: Text(S.of(context).suggestednew)),
-                      content: Container(
-                        height: 200,
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                    onPressed: () async {
-                                      final DateTime now = DateTime.now();
-                                      final DateTime firstDate = DateTime(
-                                          now.year, now.month, now.day);
-                                      final DateTime lastDate = DateTime(
-                                        now.year + 3,
-                                      );
-                                      final datepicker = await showDatePicker(
-                                          initialDate: now,
-                                          context: context,
-                                          firstDate: firstDate,
-                                          lastDate: lastDate);
-                                      if (datepicker != null) {
-                                        setState(() {
-                                          dateValue = datepicker;
-                                          DateController.text = datepicker.toString();
-                                        });
-                                      }
-                                    },
-                                    icon: const Icon(
-                                        Icons.calendar_month_outlined)),
-                                Text(dateValue == null
-                                    ? "date"
-                                    : formatter.format(dateValue!)),
-                              ],
-                            ),
-                            const TextField(
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(labelText: "وصف"),
-                            )
-                          ],
-                        ),
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'Cancel'),
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () => {
-                            print("done"),
-                            _newDate(),
-                            Navigator.pop(context, 'OK'),
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.amber, // Set text color
+                ]),
+                const SizedBox(
+          height: 70,
                 ),
-                child:  Text(S.of(context).suggestednew),
-              ),
+                Center(
+          child: Text(
+            '${data.fname!} ${data.lname}',
+            style: const TextStyle(
+                fontFamily: 'Cairo', fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+                ),
+                Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(" الخدمة المطلوبة: ${data.servicen!}"),
+            const SizedBox(
+              width: 15,
+            ),
+            const Icon(
+              Icons.work,
+              size: 30,
+            ),
+          ],
+                ),
+                const SizedBox(
+          height: 30,
+                ),
+                Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text('${data.city!} - ${data.location!}'),
+            const SizedBox(
+              width: 15,
+            ),
+            const Icon(
+              Icons.location_city,
+              size: 30,
+            ),
+          
+            // Row(
+            //   children: [
+            //     Icon(
+            //       Icons.rate_review_outlined,
+            //       size: 30,
+            //     ),
+            //     SizedBox(
+            //       width: 15,
+            //     ),
+            //     Text('${snapshot.data?.rating}')
+            //   ],
+            // )
+          ],
+                ),
+                const SizedBox(
+          height: 30,
+                ),
+                Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(data.phone!),
+            const SizedBox(
+              width: 15,
+            ),
+            const Icon(
+              Icons.phone_android_outlined,
+              size: 30,
             )
           ],
-        ),
-      )
-    ]));
+                ),
+                const SizedBox(
+          height: 30,
+                ),
+                Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(DateUtil.formatDate(data.date!)),
+            const SizedBox(
+              width: 15,
+            ),
+            const Icon(
+              Icons.calendar_month_outlined,
+              size: 30,
+            )
+          ],
+                ),
+                const SizedBox(
+          height: 30,
+                ),
+                Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(data.description!),
+            const SizedBox(
+              width: 15,
+            ),
+            const Icon(
+              Icons.description_outlined,
+              size: 30,
+            )
+          ],
+                ),
+                const SizedBox(
+          height: 60,
+                ),
+                Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            if(data.status==0)
+            ElevatedButton(
+              onPressed: () {
+                _accept(data.id);
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.green, // Set text color
+              ),
+              child:  Text(S.of(context).approved),
+            ),
+            if(data.status==0)
+            ElevatedButton(
+              onPressed: () {
+                _reject(data.id);
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.red, // Set text color
+              ),
+              child:  Text(S.of(context).reject),
+            ),
+          ],
+                ),
+                Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if(data.status==0)
+              Directionality(
+                textDirection: ui.TextDirection.ltr,
+
+                child: ElevatedButton(
+                  onPressed: () {
+                    DateTime? dateValue;
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title:  Center(child: Text(S.of(context).suggestednew)),
+                        content: Container(
+                          height: 200,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                      onPressed: () async {
+                                        final DateTime now = DateTime.now();
+                                        final DateTime firstDate = DateTime(
+                                            now.year, now.month, now.day);
+                                        final DateTime lastDate = DateTime(
+                                          now.year + 3,
+                                        );
+                                        final datepicker = await showDatePicker(
+                                            initialDate: now,
+                                            context: context,
+                                            firstDate: firstDate,
+                                            lastDate: lastDate);
+                                        if (datepicker != null) {
+                                          setState(() {
+                                            dateValue = datepicker;
+                                            DateController.text = datepicker.toString();
+                                          });
+                                        }
+                                      },
+                                      icon: const Icon(
+                                          Icons.calendar_month_outlined)),
+                                  Text(dateValue == null
+                                      ? "date"
+                                      : formatter.format(dateValue!)),
+                                ],
+                              ),
+                              const TextField(
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(labelText: "وصف"),
+                              )
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () => {
+                              print("done"),
+                              _newDate(),
+                              Navigator.pop(context, 'OK'),
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.amber, // Set text color
+                  ),
+                  child:  Text(S.of(context).suggestednew),
+                ),
+              )
+            ],
+          ),
+                )
+              ]),
+        ));
   }
 }

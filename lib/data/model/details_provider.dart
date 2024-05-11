@@ -8,7 +8,7 @@ class detailsp {
   final int? id;
   final String? description;
   final String? date;
-
+  final int? status;
   final String? servicen;
 
   detailsp(
@@ -21,6 +21,7 @@ class detailsp {
       this.phone,
       this.servicen,
       this.description,
-      this.date
+      this.date,
+        this.status
       });
 }

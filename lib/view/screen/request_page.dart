@@ -61,8 +61,9 @@ class Request extends StatelessWidget {
                   descrbtion: requests[index]['description'],
                   city: requests[index]['city'],
                   address: requests[index]['address'],
-                  status: requests[index]['disblaystats'],
+                  status: requests[index]['status'],
                   newDate: requests[index]['newdate'],
+                  statustext: requests[index]['disblaystats'],
                 ),
               );
             }

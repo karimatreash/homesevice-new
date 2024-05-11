@@ -17,6 +17,7 @@ class cardBoking extends StatefulWidget {
   final int requestid;
   final int status;
   final String newDate;
+  final String? statustext;
   const cardBoking(
       {super.key,
       required this.name1,
@@ -29,7 +30,8 @@ class cardBoking extends StatefulWidget {
       required this.address,
       required this.requestid,
       required this.status,
-      required this.newDate});
+      required this.newDate,
+        this.statustext});
 
   @override
   State<cardBoking> createState() => _cardBokingState();
@@ -85,7 +87,7 @@ class _cardBokingState extends State<cardBoking> {
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20)),
-              Text(" ${widget.status}",
+              Text(" ${widget.statustext}",
                   style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
